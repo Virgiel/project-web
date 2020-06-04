@@ -8,7 +8,7 @@ class Vector2 {
   }
 
   static ZERO() {
-    return Vector2(0, 0);
+    return new Vector2(0, 0);
   }
 
   /* ----- Vector operation ----- */
@@ -62,5 +62,3 @@ class Vector2 {
     this.y /= nb;
   }
 }
-
-export default Vector2;
