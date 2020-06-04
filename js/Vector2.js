@@ -34,6 +34,7 @@ class Vector2 {
     if (magnitude2 > limit * limit) {
       this.normalize().mul(limit);
     }
+    return this;
   }
 
   dist(other) {
@@ -64,7 +65,6 @@ class Vector2 {
   }
 
   div(nb) {
-    console.log(nb);
     this.x /= nb;
     this.y /= nb;
     return this;

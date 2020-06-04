@@ -8,5 +8,5 @@ fetch("./component/footer.html")
 function insertAndExecute(selector, text) {
   const element = document.querySelector(selector);
   element.innerHTML = text;
-  nodeScriptReplace(element);
+  //nodeScriptReplace(element);
 }

@@ -2,10 +2,222 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Simulating Life • Random Walker</titl
+    <title>Simulating Life • Random Walker</title>
     <link rel="stylesheet" type="text/css" href="asset/theme/main.css" />
   </head>
   <body>
+    <header></header>
     <h1>Random walker</h1>
+    <div class="action-wrapper">
+      <select class="selector" name="mode" id="mode" oninput="updateMode()">
+        <option value="bounce">Bounce</option>
+        <option value="infinite">Infinite</option>
+      </select>
+      <div id="nervosity" class="slide-wrapper">
+        <label for="nervosity">Nervosity:</label>
+        <span id="valnerv"></span>
+        <input
+          type="range"
+          class="slider"
+          name="nervosity"
+          min="0"
+          max="50"
+          value="2"
+          oninput="updateNervosity()"
+        />
+      </div>
+      <div id="velocity" class="slide-wrapper">
+        <label for="velocity">Velocity:<span id="demo"></span></label>
+        <input
+          type="range"
+          class="slider"
+          name="velocity"
+          min="1"
+          max="30"
+          value="5"
+          oninput="updateVelocity()"
+        />
+        <span id="demo"></span>
+      </div>
+    </div>
+
+    <div class="content">
+      <canvas id="canvas" height="600" width="600"></canvas>
+    </div>
+
+    <footer></footer>
+
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+
+      .selector {
+        height: fit-content;
+        border: solid 1px white;
+        padding: 3px;
+      }
+      .selector:hover {
+        cursor: pointer;
+      }
+
+      .action-wrapper {
+        display: flex;
+        justify-content: space-evenly;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .content {
+        width: fit-content;
+        padding: 8px;
+        margin: 0 auto;
+      }
+
+      .slide-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        margin: 2px;
+      }
+
+      .slide-wrapper label {
+        padding: 0;
+        margin: 0;
+        margin-right: 4px;
+      }
+
+      .slider {
+        flex: 1;
+        -webkit-appearance: none;
+        width: 100%;
+        height: 4px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+      }
+
+      .slider:hover {
+        opacity: 1;
+      }
+
+      .slider::-webkit-slider-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: blue;
+        cursor: pointer;
+      }
+
+    </style>
   </body>
+  <script src="js/ComponentBinding.js"></script>
+  <script src="js/MathUtils.js"></script>
+  <script src="js/Vector2.js"></script>
+  <script>
+    const canvas = document.querySelector("#canvas");
+    const context = canvas.getContext("2d");
+
+    /* ----- Constants ----- */
+
+    const WIDTH = 600;
+    const HEIGHT = 600;
+    let nervosity = 2;
+    let maxVel = 5;
+    let bouncing = true;
+
+    /* ----- Walker ----- */
+
+    let pos = new Vector2(WIDTH / 2, HEIGHT / 2);
+    let vel = new Vector2(0, 0);
+    let acc = new Vector2(0, 0);
+
+    function update() {
+      let rng = new Vector2(
+        Math.randomRange(-nervosity, nervosity),
+        Math.randomRange(-nervosity, nervosity)
+      );
+      acc.add(rng);
+      vel.add(acc).limitMagnitude(maxVel);
+      pos.add(vel);
+    }
+
+    function checkEdgesBounce() {
+      if (pos.x < 0 || pos.x > WIDTH || pos.y < 0 || pos.y > HEIGHT) {
+        acc.mul(-1);
+      }
+      if (pos.x < 0) {
+        pos.x = 0;
+      } else if (pos.x > WIDTH) {
+        pos.x = WIDTH;
+      }
+      if (pos.y < 0) {
+        pos.y = 0;
+      } else if (pos.y > HEIGHT) {
+        pos.y = WIDTH;
+      }
+    }
+
+    function checkEdgeInfinite() {
+      if (pos.x < 0) {
+        pos.x = WIDTH;
+      } else if (pos.x > WIDTH) {
+        pos.x = 0;
+      }
+      if (pos.y < 0) {
+        pos.y = WIDTH;
+      } else if (pos.y > HEIGHT) {
+        pos.y = 0;
+      }
+    }
+
+    function draw(ctx) {
+      ctx.fillStyle = "black";
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, 5, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    /* ----- Animation ----- */
+
+    function step() {
+      context.clearRect(0, 0, WIDTH, HEIGHT);
+      update();
+      if (bouncing) {
+        checkEdgesBounce();
+      } else {
+        checkEdgeInfinite();
+      }
+      draw(context);
+      window.requestAnimationFrame(step);
+    }
+
+    step();
+
+    /* ----- Input ----- */
+
+    function updateMode() {
+      bouncing = document.querySelector("#mode").value == "bounce";
+    }
+
+    function updateNervosity() {
+      var value = document.querySelector("#nervosity input").value;
+      nervosity = value;
+      document.querySelector("#nervosity label").textContent =
+        "Nervosity " + value;
+    }
+
+    function updateVelocity() {
+      var value = document.querySelector("#velocity input").value;
+      maxVel = value;
+      document.querySelector("#velocity label").textContent =
+        "Velocity " + value;
+    }
+
+    updateNervosity();
+    updateVelocity();
+  </script>
 </html>
