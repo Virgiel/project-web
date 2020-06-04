@@ -20,7 +20,7 @@
           type="range"
           class="slider"
           name="nervosity"
-          min="0"
+          min="1"
           max="50"
           value="2"
           oninput="updateNervosity()"
@@ -51,6 +51,11 @@
       canvas {
         border: 1px solid black;
       }
+      .content {
+        width: fit-content;
+        padding: 8px;
+        margin: 0 auto;
+      }
 
       .selector {
         height: fit-content;
@@ -65,12 +70,6 @@
         display: flex;
         justify-content: space-evenly;
         max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .content {
-        width: fit-content;
-        padding: 8px;
         margin: 0 auto;
       }
 
@@ -111,7 +110,6 @@
         background: blue;
         cursor: pointer;
       }
-
     </style>
   </body>
   <script src="js/ComponentBinding.js"></script>
@@ -121,7 +119,7 @@
     const canvas = document.querySelector("#canvas");
     const context = canvas.getContext("2d");
 
-    /* ----- Constants ----- */
+    /* ----- Parameters ----- */
 
     const WIDTH = 600;
     const HEIGHT = 600;
@@ -129,7 +127,7 @@
     let maxVel = 5;
     let bouncing = true;
 
-    /* ----- Walker ----- */
+    /* ----- Simulation ----- */
 
     let pos = new Vector2(WIDTH / 2, HEIGHT / 2);
     let vel = new Vector2(0, 0);

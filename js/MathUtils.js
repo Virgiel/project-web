@@ -6,3 +6,8 @@
 Math.randomRange = (min, max) => {
   return Math.random() * (max - min) + min;
 };
+
+/** Generate a random boolean */
+Math.randomBool = () => {
+  return Math.random() > 0.5;
+};

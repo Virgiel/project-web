@@ -6,6 +6,133 @@
     <link rel="stylesheet" type="text/css" href="asset/theme/main.css" />
   </head>
   <body>
-    <h1>Game of life</h1>
+    <header></header>
+    <div class="bouts">
+      <button class="pause" id="pause" onclick="pause()">Pause</button>
+      <button class="rdm" id="rdm" onclick="randomize()">Random</button>
+    </div>
+    <div class="content">
+      <canvas id="canvas" height="600" width="600"></canvas>
+    </div>
+    <footer></footer>
+    <style>
+
+      .bouts{
+        display: flex;
+        justify-content: center;
+      }
+
+      .content {
+        width: fit-content;
+        padding: 8px;
+        margin: 0 auto;
+      }
+      .pause,
+      .rdm {
+        background-color: #ededed;
+        text-transform: uppercase;
+        border: 0;
+        border-radius: 3px;
+        margin: 10px;
+        padding: 4px 12px;
+        font-size: 1.05em;
+      }
+
+      .pause:hover,
+      .rdm:hover {
+        background-color: #d8d8d8;
+        cursor: pointer;
+        font-size: 1.1em;
+      }
+    </style>
   </body>
+  <script src="js/ComponentBinding.js"></script>
+  <script src="js/MathUtils.js"></script>
+  <script>
+    const canvas = document.querySelector("#canvas");
+    const context = canvas.getContext("2d");
+
+    /* ----- Parameters ----- */
+
+    const width = 600;
+    const height = 600;
+    const cellLen = 6;
+    const nbCol = width / cellLen;
+    const nbRow = height / cellLen;
+    let isRunning = true;
+
+    /* ----- Simulation ----- */
+
+    let grid = [];
+
+    function randomize() {
+      grid = new Array(nbCol * nbRow);
+      for (let i = 0; i < grid.length; i++) {
+        grid[i] = Math.randomBool();
+      }
+      draw(context);
+    }
+
+    function pause() {
+      isRunning = !isRunning;
+    }
+
+    function toIndex(row, col) {
+      return row * nbCol + col;
+    }
+
+    function countNeighborhood(row, col) {
+      const up = row == 0 ? nbRow : row - 1;
+      const down = row == nbRow ? 0 : row + 1;
+      const left = col == 0 ? nbCol : col - 1;
+      const right = col == nbCol ? 0 : col + 1;
+      const count =
+        grid[toIndex(up, left)] +
+        grid[toIndex(up, col)] +
+        grid[toIndex(up, right)] +
+        grid[toIndex(row, left)] +
+        grid[toIndex(row, right)] +
+        grid[toIndex(down, left)] +
+        grid[toIndex(down, col)] +
+        grid[toIndex(down, right)];
+      return count != NaN ? count : 0;
+    }
+
+    function update() {
+      let nextGrid = new Array(nbCol * nbRow);
+      for (let row = 0; row < nbRow; row++) {
+        for (let col = 0; col < nbCol; col++) {
+          const nb = countNeighborhood(row, col);
+          const index = toIndex(row, col);
+          nextGrid[index] = grid[index] ? nb == 2 || nb == 3 : nb == 3;
+        }
+      }
+      grid = nextGrid;
+    }
+
+    function draw(ctx) {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "black";
+      for (let row = 0; row < nbRow; row++) {
+        for (let col = 0; col < nbCol; col++) {
+          if (grid[toIndex(row, col)] == true) {
+            ctx.fillRect(col * cellLen, row * cellLen, cellLen, cellLen);
+          }
+        }
+      }
+    }
+
+    /* ----- Animation ----- */
+
+    function step() {
+      if (isRunning) {
+        update();
+        draw(context);
+      }
+      window.requestAnimationFrame(step);
+    }
+
+    randomize();
+    step();
+  </script>
 </html>
