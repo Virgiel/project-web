@@ -42,7 +42,7 @@
     </div>
 
     <div class="content">
-      <canvas id="canvas" height="600" width="600"></canvas>
+      <canvas id="canvas"></canvas>
     </div>
 
     <footer></footer>
@@ -53,7 +53,6 @@
       }
       .content {
         width: fit-content;
-        padding: 8px;
         margin: 0 auto;
       }
 
@@ -113,16 +112,18 @@
     </style>
   </body>
   <script src="js/ComponentBinding.js"></script>
+  <script src="js/ReactiveCanvas.js"></script>
   <script src="js/MathUtils.js"></script>
   <script src="js/Vector2.js"></script>
   <script>
+    const WIDTH = 600;
+    const HEIGHT = 600;
     const canvas = document.querySelector("#canvas");
     const context = canvas.getContext("2d");
+    window.linkReactiveCanvas(canvas, WIDTH, HEIGHT, 16);
 
     /* ----- Parameters ----- */
 
-    const WIDTH = 600;
-    const HEIGHT = 600;
     let nervosity = 2;
     let maxVel = 5;
     let bouncing = true;

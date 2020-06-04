@@ -12,19 +12,17 @@
       <button class="rdm" id="rdm" onclick="randomize()">Random</button>
     </div>
     <div class="content">
-      <canvas id="canvas" height="600" width="600"></canvas>
+      <canvas id="canvas"></canvas>
     </div>
     <footer></footer>
     <style>
-
-      .bouts{
+      .bouts {
         display: flex;
         justify-content: center;
       }
 
       .content {
         width: fit-content;
-        padding: 8px;
         margin: 0 auto;
       }
       .pause,
@@ -47,18 +45,20 @@
     </style>
   </body>
   <script src="js/ComponentBinding.js"></script>
+  <script src="js/ReactiveCanvas.js"></script>
   <script src="js/MathUtils.js"></script>
   <script>
+    const WIDTH = 600;
+    const HEIGHT = 600;
     const canvas = document.querySelector("#canvas");
     const context = canvas.getContext("2d");
+    window.linkReactiveCanvas(canvas, WIDTH, HEIGHT, 16);
 
     /* ----- Parameters ----- */
 
-    const width = 600;
-    const height = 600;
     const cellLen = 6;
-    const nbCol = width / cellLen;
-    const nbRow = height / cellLen;
+    const nbCol = WIDTH / cellLen;
+    const nbRow = HEIGHT / cellLen;
     let isRunning = true;
 
     /* ----- Simulation ----- */
@@ -111,7 +111,7 @@
     }
 
     function draw(ctx) {
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, WIDTH, HEIGHT);
       ctx.fillStyle = "black";
       for (let row = 0; row < nbRow; row++) {
         for (let col = 0; col < nbCol; col++) {
@@ -127,8 +127,8 @@
     function step() {
       if (isRunning) {
         update();
-        draw(context);
       }
+      draw(context);
       window.requestAnimationFrame(step);
     }
 
