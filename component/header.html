@@ -1,65 +1,21 @@
 <!DOCTYPE html>
-<head>
-  <script>
-    let showNav = true;
-    function test() {
-      console.log(showNav);
-      showNav = !showNav;
-      document.querySelector("nav").style.display = showNav ? "block" : "none";
-    }
-    //test();
-  </script>
-</head>
-<body>
-  <div>
-    <nav>
-      <a href="../index.html">Home</a>
-      <h4>Rand Walker</h4>
-      <div class="wrapper">
-        <a href="../rand-walker.html">• Simulation</a>
-        <a href="../rand-walker-about.html">• About</a>
-      </div>
-      <h4>Game of Life</h4>
-      <div class="wrapper">
-        <a href="../gao.html">• Simulation</a>
-        <a href="../gao-about.html">• About</a>
-      </div>
-      <h4>Genetic AI</h4>
-      <div class="wrapper">
-        <a href="../gen-ai.html">• Simulation</a>
-        <a href="../gen-ai-about.html">• About</a>
-      </div>
-      <a href="../about.html">About Us</a>
-    </nav>
-    <button onclick="console.log('lol')">toggle</button>
+<nav>
+  <a href="../index.html">Home</a>
+  <h4>Rand Walker</h4>
+  <div class="wrapper">
+    <a href="../rand-walker.html">• Simulation</a>
+    <a href="../rand-walker-about.html">• About</a>
   </div>
-
-  <style>
-    nav {
-      display: flex;
-      flex-flow: column;
-      width: fit-content;
-      margin: 0 auto;
-    }
-    nav .wrapper {
-      display: flex;
-      flex-flow: column;
-      width: fit-content;
-      padding-left: 8px;
-    }
-    nav h4 {
-      padding: 0;
-      margin: 0;
-    }
-    nav a {
-      color: gray;
-      text-decoration: none;
-      border-radius: 4px;
-      padding: 2px 6px;
-      margin: 1px;
-    }
-    nav a:hover {
-      background-color: rgba(120, 120, 120, 0.2);
-    }
-  </style>
-</body>
+  <h4>Game of Life</h4>
+  <div class="wrapper">
+    <a href="../gao.html">• Simulation</a>
+    <a href="../gao-about.html">• About</a>
+  </div>
+  <h4>Genetic AI</h4>
+  <div class="wrapper">
+    <a href="../gen-ai.html">• Simulation</a>
+    <a href="../gen-ai-about.html">• About</a>
+  </div>
+  <a href="../about.html">About Us</a>
+</nav>
+<button onclick="toggleNavBar()">toggle</button>
