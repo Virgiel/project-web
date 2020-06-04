@@ -1,4 +1,13 @@
-h1 {
-    color: darkblue;
-    margin: 0 auto;
+/* ----- Root theme ----- */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+/* ----- Input theme ----- */
