@@ -1,6 +1,7 @@
 class Vector2 {
   x = 0;
   y = 0;
+  // Welcome into my madness
 
   constructor(x, y) {
     this.x = x;
@@ -19,11 +20,13 @@ class Vector2 {
   }
 
   magnitude() {
-    return Math.sqrt(this.magnitude2);
+    return Math.sqrt(this.magnitude2());
   }
 
+  /** Transform the vector so that his magnitude is one */
   normalize() {
-    return self.div(this.magnitude);
+    this.div(this.magnitude());
+    return this;
   }
 
   limitMagnitude(limit) {
@@ -45,20 +48,25 @@ class Vector2 {
   add(other) {
     this.x += other.x;
     this.y += other.y;
+    return this;
   }
 
   sub(other) {
     this.x -= other.x;
     this.y -= other.y;
+    return this;
   }
 
   mul(nb) {
     this.x *= nb;
     this.y *= nb;
+    return this;
   }
 
   div(nb) {
+    console.log(nb);
     this.x /= nb;
     this.y /= nb;
+    return this;
   }
 }
