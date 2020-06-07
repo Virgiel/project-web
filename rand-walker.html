@@ -8,15 +8,14 @@
   </head>
   <body>
     <header></header>
-    <h1>Random walker</h1>
+    <h1 class="title">The Random Walker</h1>
     <div class="action-wrapper">
       <select class="selector" name="mode" id="mode" oninput="updateMode()">
         <option value="bounce">Bounce</option>
         <option value="infinite">Infinite</option>
       </select>
       <div id="nervosity" class="slide-wrapper">
-        <label for="nervosity">Nervosity:</label>
-        <span id="valnerv"></span>
+        <label for="nervosity"></label>
         <input
           type="range"
           class="slider"
@@ -28,7 +27,7 @@
         />
       </div>
       <div id="velocity" class="slide-wrapper">
-        <label for="velocity">Velocity:<span id="demo"></span></label>
+        <label for="velocity"></label>
         <input
           type="range"
           class="slider"
@@ -38,11 +37,10 @@
           value="5"
           oninput="updateVelocity()"
         />
-        <span id="demo"></span>
       </div>
-
-      <button class="pause" id="pause" onclick="pause()">Pause</button>
-
+    </div>
+    <div class="action-wrapper">
+      <button class="input-button" id="play" onclick="togglePlay()"></button>
     </div>
 
     <div class="content">
@@ -59,14 +57,6 @@
         width: fit-content;
         margin: 0 auto;
       }
-
-      .action-wrapper {
-        display: flex;
-        justify-content: space-evenly;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
     </style>
   </body>
   <script src="js/ComponentBinding.js"></script>
@@ -85,17 +75,13 @@
     let nervosity = 2;
     let maxVel = 5;
     let bouncing = true;
-    let isRunning = true;
+    let isRunning = false;
 
     /* ----- Simulation ----- */
 
     let pos = new Vector2(WIDTH / 2, HEIGHT / 2);
     let vel = new Vector2(0, 0);
     let acc = new Vector2(0, 0);
-
-    function pause() {
-      isRunning = !isRunning;
-    }
 
     function update() {
       let rng = new Vector2(
@@ -147,7 +133,7 @@
 
     function step() {
       context.clearRect(0, 0, WIDTH, HEIGHT);
-      if (isRunning){
+      if (isRunning) {
         update();
       }
       if (bouncing) {
@@ -163,6 +149,14 @@
 
     /* ----- Input ----- */
 
+    function togglePlay() {
+      isRunning = !isRunning;
+      document.querySelector("#play").textContent = isRunning
+        ? "Pause"
+        : "Play";
+    }
+
+
     function updateMode() {
       bouncing = document.querySelector("#mode").value == "bounce";
     }
@@ -171,17 +165,25 @@
       var value = document.querySelector("#nervosity input").value;
       nervosity = value;
       document.querySelector("#nervosity label").textContent =
-        "Nervosity " + value;
+        "Nervosity: " + value;
     }
 
     function updateVelocity() {
       var value = document.querySelector("#velocity input").value;
       maxVel = value;
       document.querySelector("#velocity label").textContent =
-        "Velocity " + value;
+        "Velocity: " + value;
     }
 
     updateNervosity();
     updateVelocity();
+    togglePlay();
+
+    window.addEventListener("keypress", (event) => {
+      if (event.code == "Space") {
+        togglePlay();
+      }
+    });
+
   </script>
 </html>

@@ -2,16 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Simulating Life • Game Of Life</title>
     <link rel="stylesheet" type="text/css" href="asset/theme/main.css" />
   </head>
   <body>
     <header></header>
-    <div class="bouts">
-      <button class="pause" id="pause" onclick="pause()">Pause</button>
-      <button class="rdm" id="rdm" onclick="randomize()">Random</button>
+    <h1 class="title">Conway's Game of Life</h1>
+    <div class="action-wrapper">
+      <div id="speed" class="slide-wrapper">
+        <label for="speed"></label>
+        <input
+          type="range"
+          class="slider"
+          name="speed"
+          min="1"
+          max="200"
+          value="50"
+          oninput="updateSpeed()"
+        />
+      </div>
+      <div id="cell-size" class="slide-wrapper">
+        <label for="cell-size"></label>
+        <input
+          type="range"
+          class="slider"
+          name="cell-size"
+          min="4"
+          max="10"
+          value="6"
+          oninput="updateCellSize()"
+        />
+      </div>
     </div>
+    <div class="action-wrapper">
+      <button class="input-button" id="play" onclick="togglePlay()"></button>
+      <button class="input-button" onclick="randomize()">
+        Random
+      </button>
+    </div>
+    <div class="action-wrapper"></div>
     <div class="content">
       <canvas id="canvas"></canvas>
     </div>
@@ -21,12 +51,6 @@
         width: fit-content;
         margin: 0 auto;
       }
-
-      .bouts {
-        display: flex;
-        justify-content: center;
-      }
-      
     </style>
   </body>
   <script src="js/ComponentBinding.js"></script>
@@ -41,10 +65,11 @@
 
     /* ----- Parameters ----- */
 
-    const cellLen = 6;
-    const nbCol = WIDTH / cellLen;
-    const nbRow = HEIGHT / cellLen;
-    let isRunning = true;
+    let cellLen = 6;
+    let nbCol = WIDTH / cellLen;
+    let nbRow = HEIGHT / cellLen;
+    let stepTime = 1000;
+    let isRunning = false;
 
     /* ----- Simulation ----- */
 
@@ -56,10 +81,6 @@
         grid[i] = Math.randomBool();
       }
       draw(context);
-    }
-
-    function pause() {
-      isRunning = !isRunning;
     }
 
     function toIndex(row, col) {
@@ -109,15 +130,60 @@
 
     /* ----- Animation ----- */
 
+    let start = Date.now();
+    let remain = 0;
     function step() {
+      const now = Date.now();
+      const diff = now - start + remain;
+      const nbStep = (diff / stepTime).toFixed(0);
+      remain = diff - nbStep * stepTime;
+
       if (isRunning) {
-        update();
+        for (let i = 0; i < nbStep; i++) {
+          update();
+        }
       }
       draw(context);
+      start = now;
       window.requestAnimationFrame(step);
     }
 
     randomize();
     step();
+
+    /* ----- Input ----- */
+
+    function togglePlay() {
+      isRunning = !isRunning;
+      document.querySelector("#play").textContent = isRunning
+        ? "Pause"
+        : "Play";
+    }
+
+    function updateSpeed() {
+      const value = document.querySelector("#speed input").value;
+      stepTime = 1000 / value;
+      document.querySelector("#speed label").textContent = "Speed: x" + value;
+    }
+
+    function updateCellSize() {
+      const value = document.querySelector("#cell-size input").value;
+      cellLen = value;
+      nbCol = (WIDTH / cellLen).toFixed(0);
+      nbRow = (HEIGHT / cellLen).toFixed(0);
+      randomize();
+      document.querySelector("#cell-size label").textContent =
+        "CellSize: " + value + "p";
+    }
+
+    updateSpeed();
+    updateCellSize();
+    togglePlay();
+
+    window.addEventListener("keypress", (event) => {
+      if (event.code == "Space") {
+        togglePlay();
+      }
+    });
   </script>
 </html>
