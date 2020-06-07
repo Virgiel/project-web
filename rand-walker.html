@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Simulating Life • Random Walker</title>
     <link rel="stylesheet" type="text/css" href="asset/theme/main.css" />
   </head>
@@ -39,6 +40,9 @@
         />
         <span id="demo"></span>
       </div>
+
+      <button class="pause" id="pause" onclick="pause()">Pause</button>
+
     </div>
 
     <div class="content">
@@ -56,15 +60,6 @@
         margin: 0 auto;
       }
 
-      .selector {
-        height: fit-content;
-        border: solid 1px white;
-        padding: 3px;
-      }
-      .selector:hover {
-        cursor: pointer;
-      }
-
       .action-wrapper {
         display: flex;
         justify-content: space-evenly;
@@ -72,43 +67,6 @@
         margin: 0 auto;
       }
 
-      .slide-wrapper {
-        display: flex;
-        align-items: center;
-        padding: 0;
-        margin: 2px;
-      }
-
-      .slide-wrapper label {
-        padding: 0;
-        margin: 0;
-        margin-right: 4px;
-      }
-
-      .slider {
-        flex: 1;
-        -webkit-appearance: none;
-        width: 100%;
-        height: 4px;
-        border-radius: 5px;
-        background: #d3d3d3;
-        outline: none;
-        opacity: 0.7;
-        -webkit-transition: 0.2s;
-        transition: opacity 0.2s;
-      }
-
-      .slider:hover {
-        opacity: 1;
-      }
-
-      .slider::-webkit-slider-thumb {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        background: blue;
-        cursor: pointer;
-      }
     </style>
   </body>
   <script src="js/ComponentBinding.js"></script>
@@ -127,12 +85,17 @@
     let nervosity = 2;
     let maxVel = 5;
     let bouncing = true;
+    let isRunning = true;
 
     /* ----- Simulation ----- */
 
     let pos = new Vector2(WIDTH / 2, HEIGHT / 2);
     let vel = new Vector2(0, 0);
     let acc = new Vector2(0, 0);
+
+    function pause() {
+      isRunning = !isRunning;
+    }
 
     function update() {
       let rng = new Vector2(
@@ -184,7 +147,9 @@
 
     function step() {
       context.clearRect(0, 0, WIDTH, HEIGHT);
-      update();
+      if (isRunning){
+        update();
+      }
       if (bouncing) {
         checkEdgesBounce();
       } else {

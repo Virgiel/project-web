@@ -14,7 +14,8 @@ function insertAndExecute(selector, text) {
 }
 let showNav = true;
 function toggleNavBar() {
-  console.log(showNav);
   showNav = !showNav;
-  document.querySelector("nav").style.display = showNav ? "block" : "none";
+  document.querySelector("#nav-bar .content").style.display = showNav
+    ? "block"
+    : "none";
 }
