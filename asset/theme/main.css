@@ -12,7 +12,7 @@ body {
 
 /* ----- Input theme ----- */
 
-button {
+.input-button {
   display: flex;
   align-items: center;
   background-color: #ededed;
@@ -24,7 +24,7 @@ button {
   font-size: 1.05em;
 }
 
-button:hover {
+.input-button:hover {
   background-color: #d8d8d8;
   cursor: pointer;
   font-size: 1.1em;
@@ -82,28 +82,45 @@ button:hover {
 
 header {
   position: fixed;
+  z-index: 666;
   top: 0;
   right: 0;
   height: 100vh;
-  background: white;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
 }
 
-#nav-bar {
-  position: relative;
-  margin: 0;
-  page-break-after: 0;
-}
-
-#nav-bar .content {
-  margin: 16px;
-}
-
-#nav-bar .toggle {
+#nav-open {
   position: absolute;
   right: 100%;
   top: 0;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  border-bottom-left-radius: 7px;
+}
+#nav-close {
+  border-radius: 4px;
+  margin: 0 auto;
+}
+#nav-open,
+#nav-close {
+  display: block;
   margin: 0;
+  background: white;
+  height: 32px;
+  width: 32px;
+  padding: 2px;
+  outline: none;
+  transition: all 200ms ease;
+  border: none;
+}
+#nav-open svg,
+#nav-close svg {
+  height: 100%;
+  width: 100%;
+}
+
+#nav-open:hover,
+#nav-close:hover {
+  background-color: #d8d8d8;
 }
 
 nav {
@@ -111,6 +128,10 @@ nav {
   flex-flow: column;
   width: fit-content;
   margin: 0 auto;
+  padding: 16px;
+  background: #fefefe;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 7px;
 }
 nav .wrapper {
   display: flex;

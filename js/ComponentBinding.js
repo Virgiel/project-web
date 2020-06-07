@@ -1,21 +1,26 @@
+/* ----- Fetch and inject ----- */
+
 fetch("./component/header.html")
   .then((response) => response.text())
   .then((data) => {
-    insertAndExecute("header", data);
-    const script = document.createElement("script");
+    inject("header", data);
+    toggleNavBar();
   });
 fetch("./component/footer.html")
   .then((response) => response.text())
-  .then((data) => insertAndExecute("footer", data));
-/** Highly unsecured but its OK for this project */
-function insertAndExecute(selector, text) {
-  const element = document.querySelector(selector);
-  element.innerHTML = text;
+  .then((data) => inject("footer", data));
+
+function inject(selector, text) {
+  document.querySelector(selector).innerHTML = text;
 }
+
+/* ----- Nav bar state ----- */
+
 let showNav = true;
 function toggleNavBar() {
   showNav = !showNav;
-  document.querySelector("#nav-bar .content").style.display = showNav
+  document.querySelector("nav").style.display = showNav ? "block" : "none";
+  document.querySelector("#nav-open").style.display = !showNav
     ? "block"
     : "none";
 }
