@@ -29,9 +29,11 @@ h3 {
 
 .action-wrapper {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   max-width: 600px;
   margin: 0 auto;
+  padding: 4px 8px;
 }
 
 .input-button {
@@ -41,7 +43,7 @@ h3 {
   text-transform: uppercase;
   border: 1px solid transparent;
   border-radius: 3px;
-  margin: 10px;
+  margin: 2px;
   padding: 4px 12px;
   font-weight: bold;
   cursor: pointer;
@@ -63,17 +65,20 @@ h3 {
   border: solid 1px white;
   padding: 3px;
   margin: 10px;
-  font-size: 0.9em;
+  font-size: 1em;
 }
 .selector:hover {
   cursor: pointer;
 }
 
 .slide-wrapper {
+  flex: 1;
   display: flex;
   align-items: center;
   padding: 0;
   margin: 2px;
+  max-width: 250px;
+  min-width: 120px;
 }
 .slide-wrapper label {
   padding: 0;
@@ -90,17 +95,17 @@ h3 {
   background: #d3d3d3;
   outline: none;
   opacity: 0.7;
-  -webkit-transition: 0.2s;
   transition: opacity 0.2s;
 }
 .slider:hover {
   opacity: 1;
 }
 .slider::-webkit-slider-thumb {
-  width: 25px;
-  height: 25px;
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: blue;
+  background: gray;
   cursor: pointer;
 }
 
