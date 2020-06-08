@@ -81,21 +81,19 @@
 
     let pos = new Vector2(WIDTH / 2, HEIGHT / 2);
     let vel = new Vector2(0, 0);
-    let acc = new Vector2(0, 0);
 
     function update() {
-      let rng = new Vector2(
+      let acc = new Vector2(
         Math.randomRange(-nervosity, nervosity),
         Math.randomRange(-nervosity, nervosity)
       );
-      acc.add(rng);
       vel.add(acc).limitMagnitude(maxVel);
       pos.add(vel);
     }
 
     function checkEdgesBounce() {
       if (pos.x < 0 || pos.x > WIDTH || pos.y < 0 || pos.y > HEIGHT) {
-        acc.mul(-1);
+        vel.mul(-1);
       }
       if (pos.x < 0) {
         pos.x = 0;
@@ -156,7 +154,6 @@
         : "Play";
     }
 
-
     function updateMode() {
       bouncing = document.querySelector("#mode").value == "bounce";
     }
@@ -165,14 +162,14 @@
       var value = document.querySelector("#nervosity input").value;
       nervosity = value;
       document.querySelector("#nervosity label").textContent =
-        "Nervosity: " + value;
+        "Nervosity: " + value.toString().padStart(2, "0");
     }
 
     function updateVelocity() {
       var value = document.querySelector("#velocity input").value;
       maxVel = value;
       document.querySelector("#velocity label").textContent =
-        "Velocity: " + value;
+        "Velocity: " + value.toString().padStart(2, "0");
     }
 
     updateNervosity();
@@ -184,6 +181,5 @@
         togglePlay();
       }
     });
-
   </script>
 </html>

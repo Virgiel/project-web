@@ -163,7 +163,8 @@
     function updateSpeed() {
       const value = document.querySelector("#speed input").value;
       stepTime = 1000 / value;
-      document.querySelector("#speed label").textContent = "Speed: x" + value;
+      document.querySelector("#speed label").textContent =
+        "Speed: x" + value.toString().padStart(3, "0");
     }
 
     function updateCellSize() {
@@ -173,7 +174,7 @@
       nbRow = (HEIGHT / cellLen).toFixed(0);
       randomize();
       document.querySelector("#cell-size label").textContent =
-        "CellSize: " + value + "p";
+        "CellSize: " + value.toString().padStart(2, "0") + "p";
     }
 
     updateSpeed();
