@@ -169,7 +169,7 @@
       var value = document.querySelector("#velocity input").value;
       maxVel = value;
       document.querySelector("#velocity label").textContent =
-        "Velocity: " + value.toString().padStart(2, "0");
+        "Velocity: " + value;
     }
 
     updateNervosity();
@@ -178,6 +178,7 @@
 
     window.addEventListener("keypress", (event) => {
       if (event.code == "Space") {
+        event.preventDefault();
         togglePlay();
       }
     });

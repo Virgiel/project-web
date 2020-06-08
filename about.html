@@ -2,11 +2,126 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Simulating Life • About Us</title>
     <link rel="stylesheet" type="text/css" href="asset/theme/main.css" />
   </head>
   <body>
-    <h1>We are ...</h1>
+    <header></header>
+    <div class="pretty-text">
+      <h1>About us</h1>
+      <h2>The team</h2>
+
+      <div class="team">
+        <div class="perso">
+          <img src="asset/img/clement.jpg" alt="Clément profile photo" />
+          <div class="content">
+            <h4>Clément Duchatel</h4>
+            <p>
+              Giving everything he has to keep up with the team, a code maniac.
+            </p>
+          </div>
+        </div>
+
+        <div class="perso">
+          <img src="asset/img/antoine.jpg" alt="Antoine profile photo" />
+          <div class="content">
+            <h4>Antoine d'Aligny</h4>
+            <p>
+              The head of the project, the genius, the one and only real dev at
+              EFREI.
+            </p>
+          </div>
+        </div>
+
+        <div class="perso">
+          <img src="asset/img/celine.jpg" alt="Céline profile photo" />
+          <div class="content">
+            <h4>Céline Khauv</h4>
+            <p>
+              Antoine's right arm, a war machin ready to code whatever Antoine
+              tells her to.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h2>The project</h2>
+      <p class="big">
+        This is a two weeks projet at EFREI for the web programming course. The
+        goal of this course and project is to learn the basic of web development
+        (HTML, CSS & JS) before learning web framework. It's the reason why this
+        website is 100% handmade. The project theme was free but it should
+        enable user interaction and dynamic content. We have chosen to do
+        simulation because they are both fun to create and to plays with.
+      </p>
+      <p>
+        We hope you find this web site interesting and invite you to discover
+        our work.
+      </p>
+    </div>
+
+    <footer></footer>
   </body>
+  <script src="js/ComponentBinding.js"></script>
+
+  <style>
+    .team {
+      display: flex;
+      justify-content: space-evenly;
+      flex-flow: row;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .perso {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin: 4px;
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      min-width: 150px;
+      padding: 8px;
+    }
+    .content h4 {
+      text-align: center;
+      font-size: 1em;
+      margin: 8px;
+      padding: 0;
+    }
+    .perso p {
+      text-align: justify;
+      margin: 0;
+    }
+
+    img {
+      flex-shrink: 0;
+      object-fit: cover;
+      height: 120px;
+      width: 120px;
+      border-radius: 100%;
+      margin: 0 auto;
+      padding: 4px;
+    }
+
+    @media (max-width: 650px) {
+      .team {
+        flex-flow: column;
+        width: fit-content;
+      }
+
+      .perso {
+        flex-flow: row;
+        flex-wrap: wrap;
+        align-items: center;
+        max-width: 500px;
+        padding: 4px;
+      }
+    }
+  </style>
 </html>

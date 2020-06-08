@@ -8,7 +8,89 @@
   </head>
   <body>
     <header></header>
-    <h1>Conway's Game of Life • About</h1>
+    <div class="pretty-text">
+      <h1>Conway's Game of Life • About</h1>
+      <h3>Principle</h3>
+      <p class="big">
+        Conway’s Game of Life is a zero-player game with a cellular automaton
+        created by the British mathematician John Horton Conway. The game of
+        Life is played on an infinite two-dimensional rectangular grid of cells.
+        Each cell can be either alive or dead depending on its 8 neighbors. A
+        pattern is called a generation and it evolves from applying the rules
+        simultaneously to every cell on the game board. One interacts with the
+        Game of Life by creating an initial configuration and observing how it
+        evolves.
+      </p>
+      <h3>Rules</h3>
+      <ul>
+        <li>
+          Any live cell with fewer than two live neighbors dies
+          (underpopulation).
+        </li>
+        <li>
+          Any live cell with more than three live neighbors dies
+          (overpopulation).
+        </li>
+        <li>
+          Any live cell with two or three live neighbors lives, unchanged, to
+          the next generation.
+        </li>
+        <li>
+          Any dead cell with exactly three live neighbors will come to life.
+        </li>
+      </ul>
+      <h3>Origins</h3>
+      <p class="big">
+        John von Neumann, a renowned mathematician, conceived cellular
+        automaton. He failed at creating automatons that could build copies of
+        itself. He works on this problem in a purely mathematical way by
+        studying how a self-reproduction process can be simulated on a grid
+        where each cell can only have a limited number of states. These works
+        will be published in his posthumous work Theory of Self-Reproductive
+        Automata. He inspired John Conway on the Game of Life. Conways tried to
+        simplify von Neumann’s idea. The game was first published on October
+        1970. <br /><br />Howard Gardner, a developmental psychologist, wrote:
+        <br />"The game made Conway instantly famous, but it also opened up a
+        whole new field of mathematical research, the field of cellular
+        automata... Because of Life's analogies with the rise, fall and
+        alterations of a society of living organisms, it belongs to a growing
+        class of what are called 'simulation games' (games that resemble real
+        life processes)"
+      </p>
+      <h3>Simulation</h3>
+      <ul>
+        <li>
+          Speed<br />
+          You can change the speed of the life simulation and observe a faster
+          evolution.
+        </li>
+        <li>
+          CellSize<br />
+          You can change cells sizes and create simulation whit a bigger or
+          smaller population.
+        </li>
+        <li>
+          Pause/Play<br />
+          To pause or play the simulation, you can click on the Play/Pause
+          button or you can also hit Space.
+        </li>
+        <li>
+          Random<br />
+          To create a new random initial configuration, you can click on the
+          Random button.
+        </li>
+      </ul>
+      <h3>Sources</h3>
+      <a
+        class="source"
+        href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
+        >Wikipédia - Conway's Game of Life</a
+      >
+      <a class="source" href="http://www.scholarpedia.org/article/Game_of_Life"
+        >Scholarpedia - Game of Life</a
+      >
+    </div>
+
     <footer></footer>
   </body>
   <script src="js/ComponentBinding.js"></script>

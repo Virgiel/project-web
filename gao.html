@@ -183,6 +183,7 @@
 
     window.addEventListener("keypress", (event) => {
       if (event.code == "Space") {
+        event.preventDefault(); 
         togglePlay();
       }
     });

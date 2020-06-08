@@ -8,9 +8,61 @@
   </head>
   <body>
     <header></header>
-    <h1>The Random Walker • About</h1>
+    <div class="pretty-text">
+      <h1>The Random Walker • About</h1>
+      <h3>Principle</h3>
+      <p class="big">
+        Random walks can explain the observed behaviors of many processes. Its
+        random steps are completely decorrelated from each other; this
+        fundamental property is called the Markov process, named after the
+        mathematician Markov. It intuitively means that at any moment, the
+        future of the system depends on its present state, but not on its past,
+        even the closest. In other words, the system "loses memory" as it
+        evolves over time. The generalization takes us into the realm of
+        Randomness.
+      </p>
+      <p class="big">
+        To simulate the movement of the walker, we used Newton’s second law
+        which states that the acceleration is proportional to the force. We can
+        note x=x(t) the position at time t. Its velocity v = v(t) is the
+        derivative of x and its acceleration a = a(t) is the derivative of v. We
+        assume that the force depends only on the position and the velocity. The
+        state of the particle at time t is described by X(t) = (x(t), v(t))
+        which proves that for any t, the future trajectory can be completely
+        specified by the current state.
+      </p>
+      <h3>Simulation</h3>
+      <ul>
+        <li>
+          Bounce/Infinite<br />
+          Choose the property of the edges.
+        </li>
+        <li>
+          Nervosity<br />The nervosity is the intensity of random accelerations.
+          The more nervous is the walker, the more furious his behavior.
+        </li>
+        <li>
+          Velocity<br />The velocity is the maximum velocity the walker can
+          reach.
+        </li>
+        <li>
+          Pause/Play<br />
+          To pause or play the simulation, you can click on the Play/Pause
+          button or you can also hit Space.
+        </li>
+      </ul>
+      <h3>Sources</h3>
+      <a
+        class="source"
+        href="https://fr.wikipedia.org/wiki/Marche_al%C3%A9atoire"
+        >Wikipédia - Marche aléatoire</a
+      >
+      <a class="source" href="http://www.bioinfo.org.cn/~wangchao/maa/mcrw.pdf"
+        >Bio Info - Markov chains and random walks</a
+      >
+    </div>
+
     <footer></footer>
   </body>
   <script src="js/ComponentBinding.js"></script>
 </html>
-  
