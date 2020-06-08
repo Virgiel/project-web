@@ -9,14 +9,23 @@ body {
 
 * {
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Crimson Text", serif;
 }
 
-.title {
-  font-family: "Crimson Text", serif;
+/* ----- Text style ----- */
+
+.pretty-text {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 16px;
+}
+h1 {
   text-align: center;
 }
-/* ----- Input theme ----- */
+h3 {
+  font-weight: normal;
+}
+/* ----- Input style ----- */
 
 .action-wrapper {
   display: flex;
