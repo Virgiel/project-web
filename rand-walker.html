@@ -8,7 +8,8 @@
   </head>
   <body>
     <header></header>
-    <h1 class="title">The Random Walker</h1>
+    <div class="pretty-text">
+    <h1>The Random Walker</h1>
     <div class="action-wrapper">
       <select class="selector" name="mode" id="mode" oninput="updateMode()">
         <option value="bounce">Bounce</option>
@@ -124,7 +125,7 @@
       ctx.fillStyle = "black";
       ctx.beginPath();
       ctx.arc(pos.x, pos.y, 5, 0, 2 * Math.PI);
-      ctx.fill();
+      ctx.fill()
     }
 
     /* ----- Animation ----- */

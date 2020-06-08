@@ -12,6 +12,10 @@ class Vector2 {
     return new Vector2(0, 0);
   }
 
+  clone() {
+    return new Vector2(this.x, this.y);
+  }
+
   /* ----- Vector operation ----- */
 
   /** The magnitude square, really fast to calculate should be used when possible */
@@ -38,10 +42,10 @@ class Vector2 {
   }
 
   dist(other) {
-    return Math.sqrt(
-      Math.pow(this.x - other.x, 2),
-      Math.pow(this.y - other.y, 2)
+    const dist = Math.sqrt(
+      Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)
     );
+    return dist;
   }
 
   /* ----- Standard operation -----*/

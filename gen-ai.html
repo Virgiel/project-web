@@ -2,14 +2,141 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Simulating Life • Gen AI</title>
     <link rel="stylesheet" type="text/css" href="asset/theme/main.css" />
   </head>
   <body>
     <header></header>
     <h1>Genetic Artificial Intelligence</h1>
+    <div class="action-wrapper">
+      <div id="nb-wall" class="slide-wrapper">
+        <label for="nb-wall"></label>
+        <input
+          type="range"
+          class="slider"
+          name="nb-wall"
+          min="0"
+          max="30"
+          value="10"
+          oninput="updateNbWall()"
+        />
+      </div>
+
+      <div id="randomness" class="slide-wrapper">
+        <label for="randomness"></label>
+        <input
+          type="range"
+          class="slider"
+          name="randomness"
+          step="0.01"
+          min="0.01"
+          max="0.20"
+          value="0.07"
+          oninput="mutationRate()"
+        />
+      </div>
+    </div>
+    <div class="action-wrapper">
+      <button class="input-button" id="play" onclick="togglePlay()"></button>
+      <button class="input-button" onclick="randomize()">
+        Random
+      </button>
+    </div>
+    <div class="content">
+      <canvas id="canvas"></canvas>
+    </div>
     <footer></footer>
+    <style>
+      .content {
+        width: fit-content;
+        margin: 0 auto;
+        border: 1px solid black;
+      }
+    </style>
   </body>
   <script src="js/ComponentBinding.js"></script>
+  <script src="js/ReactiveCanvas.js"></script>
+  <script src="js/MathUtils.js"></script>
+  <script src="js/Vector2.js"></script>
+  <script src="js/GenAI.js"></script>
+  <script>
+    const WIDTH = 600;
+    const HEIGHT = 600;
+    const canvas = document.querySelector("#canvas");
+    const context = canvas.getContext("2d");
+    window.linkReactiveCanvas(canvas, WIDTH, HEIGHT, 16);
+
+    /* ----- Parameters ----- */
+
+    let population = undefined;
+    let board = undefined;
+    let isRunning = false;
+
+    /* ----- Simulation ----- */
+
+    function randomize() {
+      population = new Population(new Vector2(WIDTH / 2, HEIGHT / 2));
+      board = new Board();
+      draw(context);
+    }
+
+    function update() {
+      population.update(board);
+    }
+
+    function draw(ctx) {
+      board.draw(ctx);
+      population.draw(ctx);
+    }
+
+    /* ----- Animation ----- */
+
+    function step() {
+      if (isRunning) {
+        update();
+      }
+      context.clearRect(0, 0, WIDTH, HEIGHT);
+      draw(context);
+      window.requestAnimationFrame(step);
+    }
+
+    randomize();
+    step();
+
+    /* ----- Input ----- */
+
+    function togglePlay() {
+      isRunning = !isRunning;
+      document.querySelector("#play").textContent = isRunning
+        ? "Pause"
+        : "Play";
+    }
+    function updateNbWall() {
+      var value = document.querySelector("#nb-wall input").value;
+      nbWall = value;
+      document.querySelector("#nb-wall label").textContent =
+        "Nb wall: " + value.toString().padStart(2, "0");
+      randomize();
+    }
+    function mutationRate() {
+      var value = document.querySelector("#randomness input").value;
+      genRng = value;
+      document.querySelector("#randomness label").textContent =
+        "Mutation rate: " +
+        (value * 100).toFixed(0).toString().padStart(2, "0") +
+        "%";
+    }
+
+    togglePlay();
+    updateNbWall();
+    mutationRate();
+
+    window.addEventListener("keypress", (event) => {
+      if (event.code == "Space") {
+        event.preventDefault();
+        togglePlay();
+      }
+    });
+  </script>
 </html>

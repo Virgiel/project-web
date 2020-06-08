@@ -8,7 +8,59 @@
   </head>
   <body>
     <header></header>
-    <title>Genetic Artificial Intelligence • About</title>
+
+    <div class="pretty-text">
+      <h1>Genetic Artificial Intelligence • About</h1>
+      <h3>Principle</h3>
+      <p class="big">
+        The process of fitness selection starts with the simulation of a
+        generation of entities. At the end of a generation (a timeout or the end
+        of a task) a new generation is made of the fittest individuals from the
+        population. New entities inherit their parent's characteristics. If
+        parents have good fitness, their babies will inherit it and have a
+        better chance of surviving. This process keeps on iterating and in the
+        end, a generation with the fittest individuals will be found.
+      </p>
+      <p class="big">
+        During the inheritance of characteristics, some mutations are applied
+        with a low random probability. Mutations occur to create new
+        possibilities and find new solutions but a huge mutation rate damage the
+        learning rate.
+      </p>
+      <p class="big">
+        Genetic AI can be applied to a search problem. We consider a set of
+        solutions for a problem and select the set of best ones out of them.
+      </p>
+      <h3>Simulation</h3>
+      <ul>
+        <h4>Sliders</h4>
+        <li>
+          Nb Wall <br />
+          To define how many obstacles you want the AI to be confronted with.
+        </li>
+        <li>
+          Mutation Rate <br />
+          The mutation rate measures the quantity of mutation applied during the
+          inheritance of characteristics.
+        </li>
+        <h4>Buttons</h4>
+        <li>
+          Pause/Play<br />
+          To pause or play the simulation, you can click on the Play/Pause
+          button or you can also hit Space.
+        </li>
+        <li>
+          Random<br />
+          To create a new random initial configuration, you can click on the
+          Random button.
+        </li>
+      </ul>
+      <h3>Sources</h3>
+      <a class="source" href="https://en.wikipedia.org/wiki/Genetic_algorithm"
+        >Wikipédia - Genetic Algorithm</a
+      >
+    </div>
+
     <footer></footer>
   </body>
   <script src="js/ComponentBinding.js"></script>
