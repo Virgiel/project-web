@@ -245,3 +245,9 @@ footer .media-button:focus {
   color: black;
   background: white;
 }
+
+/* ----- Reactive canvas ----- */
+
+canvas {
+  max-width: 100%;
+}

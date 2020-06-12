@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Simulating Life • Game Of Life</title>
+    <title>Game of life • Sim</title>
     <link rel="stylesheet" type="text/css" href="asset/theme/main.css" />
   </head>
   <body>
@@ -17,7 +17,7 @@
           class="slider"
           name="speed"
           min="1"
-          max="200"
+          max="300"
           value="50"
           oninput="updateSpeed()"
         />
@@ -43,7 +43,7 @@
     </div>
     <div class="action-wrapper"></div>
     <div class="content">
-      <canvas id="canvas"></canvas>
+      <canvas id="canvas" height="600" width="600"></canvas>
     </div>
     <footer></footer>
     <style>
@@ -54,21 +54,19 @@
     </style>
   </body>
   <script src="js/ComponentBinding.js"></script>
-  <script src="js/ReactiveCanvas.js"></script>
   <script src="js/MathUtils.js"></script>
   <script>
     const WIDTH = 600;
     const HEIGHT = 600;
     const canvas = document.querySelector("#canvas");
     const context = canvas.getContext("2d");
-    window.linkReactiveCanvas(canvas, WIDTH, HEIGHT, 16);
 
     /* ----- Parameters ----- */
 
     let cellLen = 6;
     let nbCol = WIDTH / cellLen;
     let nbRow = HEIGHT / cellLen;
-    let stepTime = 1000;
+    let stepTime = 10;
     let isRunning = false;
 
     /* ----- Simulation ----- */
@@ -130,13 +128,12 @@
 
     /* ----- Animation ----- */
 
-    let start = Date.now();
-    let remain = 0;
+    let counter = 0;
     function step() {
-      const now = Date.now();
-      const diff = now - start + remain;
-      const nbStep = (diff / stepTime).toFixed(0);
-      remain = diff - nbStep * stepTime;
+      counter += 100;
+      const nbStep = (counter / stepTime).toFixed(0);
+      counter -= nbStep * stepTime;
+      console.log(nbStep);
 
       if (isRunning) {
         for (let i = 0; i < nbStep; i++) {
@@ -144,7 +141,6 @@
         }
       }
       draw(context);
-      start = now;
       window.requestAnimationFrame(step);
     }
 
@@ -162,9 +158,9 @@
 
     function updateSpeed() {
       const value = document.querySelector("#speed input").value;
-      stepTime = 1000 / value;
+      stepTime = 10000 / value;
       document.querySelector("#speed label").textContent =
-        "Speed: x" + value.toString().padStart(3, "0");
+        "Speed: x" + (value / 100).toFixed(2);
     }
 
     function updateCellSize() {
@@ -183,7 +179,7 @@
 
     window.addEventListener("keypress", (event) => {
       if (event.code == "Space") {
-        event.preventDefault(); 
+        event.preventDefault();
         togglePlay();
       }
     });

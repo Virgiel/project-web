@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Simulating Life • Gen AI</title>
+    <title>Gen AI • Sim</title>
     <link rel="stylesheet" type="text/css" href="asset/theme/main.css" />
   </head>
   <body>
@@ -44,7 +44,7 @@
       </button>
     </div>
     <div class="content">
-      <canvas id="canvas"></canvas>
+      <canvas id="canvas" width="600" height="600"></canvas>
     </div>
     <footer></footer>
     <style>
@@ -56,7 +56,6 @@
     </style>
   </body>
   <script src="js/ComponentBinding.js"></script>
-  <script src="js/ReactiveCanvas.js"></script>
   <script src="js/MathUtils.js"></script>
   <script src="js/Vector2.js"></script>
   <script src="js/GenAI.js"></script>
@@ -65,7 +64,6 @@
     const HEIGHT = 600;
     const canvas = document.querySelector("#canvas");
     const context = canvas.getContext("2d");
-    window.linkReactiveCanvas(canvas, WIDTH, HEIGHT, 16);
 
     /* ----- Parameters ----- */
 
